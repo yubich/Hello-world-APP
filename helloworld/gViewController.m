@@ -9,6 +9,9 @@
 #import "gViewController.h"
 
 @interface gViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UITextField *textFied;
+- (IBAction)changeGreeting:(id)sender;
 
 @end
 
@@ -26,4 +29,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)changeGreeting:(id)sender {
+    self.userName = self.textFied.text;
+    
+    NSString *nameString = self.userName;
+    if([nameString length] == 0){
+        nameString = @"World";
+    }
+    NSString *greeting = [[NSString alloc] initWithFormat:@"Hello, %@!",nameString];
+    self.label.text = greeting;
+}
+- (void)viewDidUnload {
+    [self setTextFied:nil];
+    [self setLabel:nil];
+    [super viewDidUnload];
+}
+- (BOOL)textFieldShouldReturn: (UITextField *)theTextField {
+    if( theTextField == self.textFied){
+        [theTextField resignFirstResponder];
+    }
+    return YES;
+}
 @end
