@@ -47,6 +47,19 @@
 - (BOOL)textFieldShouldReturn: (UITextField *)theTextField {
     if( theTextField == self.textFied){
         [theTextField resignFirstResponder];
+        
+        // the following code is same as the one in 'changGreeting'
+        // the purpose of this is to make the 'return' button functions
+        // as a sender when you press it 
+        self.userName = self.textFied.text;
+        
+        NSString *nameString = self.userName;
+        if([nameString length] == 0){
+            nameString = @"World";
+        }
+        NSString *greeting = [[NSString alloc] initWithFormat:@"Hello, %@!",nameString];
+        self.label.text = greeting;
+        
     }
     return YES;
 }
